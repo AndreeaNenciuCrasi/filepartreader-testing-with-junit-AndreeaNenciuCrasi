@@ -1,1 +1,10 @@
-Files in Java might be tricky, but it is fun enough!
+1.Files in Java might be tricky, but it is fun enough!
+2.How to Split String by New Line
+3.How to read N amount of lines from a file?
+4.How do I create a Java string from the contents of a file?
+5.Different ways of Reading a text file in Java
+6.Files in Java might be tricky, but it is fun enough!
+7.How to Split String by New Line
+8.How to read N amount of lines from a file?
+9.How do I create a Java string from the contents of a file?
+10.Different ways of Reading a text file in Java
