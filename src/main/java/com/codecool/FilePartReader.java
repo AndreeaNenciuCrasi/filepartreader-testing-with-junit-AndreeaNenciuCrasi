@@ -32,26 +32,33 @@ public class FilePartReader {
         this.filePath = filePath;
     }
 
-    public void setFromLine(int fromLine) {
-        this.fromLine = fromLine;
-    }
-
-    public void setToLine(int toLine) {
-        this.toLine = toLine;
-    }
-
-    public void setup(String filePath, int fromLine, int toLine) throws IllegalArgumentException {
-        try {
-            if ((toLine < fromLine) || (fromLine < 1)) {
-                this.filePath = filePath;
-                this.fromLine = fromLine;
-                this.toLine = toLine;
-            }
-        } catch (IllegalArgumentException e) {
+    public int setFromLine(int fromLine) {
+        if (fromLine <= toLine) {
+            return this.fromLine = fromLine;
+        }else{
+            throw new IllegalArgumentException();
         }
     }
 
-    public String read(String filePath) {
+    public int setToLine(int toLine) {
+        if( toLine >= fromLine){
+        return this.toLine = toLine;
+        }else{
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void setup(String filePath, int fromLine, int toLine) throws IllegalArgumentException {
+
+            if ((toLine < fromLine) || (fromLine < 1)) {
+                throw new IllegalArgumentException();
+            }
+                this.filePath = "src/main/resources/text_file.txt";
+                this.fromLine = fromLine;
+                this.toLine = toLine;
+    }
+
+    public String read() {
 //        String data = "";
 //        try {
 //            data = new String(Files.readAllBytes(Paths.get(filePath)));
@@ -71,9 +78,9 @@ public class FilePartReader {
         return fileContents.toString();
     }
 
-    public String readLines()throws IndexOutOfBoundsException {
+    public String readLines() throws IndexOutOfBoundsException {
         List<String> listOfLines;
-        listOfLines = Arrays.asList(this.read("src/main/resources/text_file.txt").split("\\r?\\n"));
+        listOfLines = Arrays.asList(this.read().split("\\r?\\n"));
         int numberOfLines = listOfLines.size();
         StringBuilder stringResult = new StringBuilder();
 
@@ -83,11 +90,11 @@ public class FilePartReader {
             System.out.println("First argument must be smaller or equal to second argument.");
             throw new IndexOutOfBoundsException();
         } else if (toLine > numberOfLines) {
-            for (int i = fromLine-1; i < numberOfLines; i++) {
+            for (int i = fromLine - 1; i < numberOfLines; i++) {
                 stringResult.append(listOfLines.get(i));
             }
         } else {
-            for (int i = fromLine-1; i < toLine; i++) {
+            for (int i = fromLine - 1; i < toLine; i++) {
                 stringResult.append(listOfLines.get(i));
             }
         }
