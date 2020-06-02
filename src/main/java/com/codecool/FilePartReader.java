@@ -16,6 +16,30 @@ public class FilePartReader {
     public FilePartReader() {
     }
 
+    public int getFromLine() {
+        return fromLine;
+    }
+
+    public int getToLine() {
+        return toLine;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public void setFromLine(int fromLine) {
+        this.fromLine = fromLine;
+    }
+
+    public void setToLine(int toLine) {
+        this.toLine = toLine;
+    }
+
     public void setup(String filePath, int fromLine, int toLine) throws IllegalArgumentException {
         try {
             if ((toLine < fromLine) || (fromLine < 1)) {
@@ -47,24 +71,24 @@ public class FilePartReader {
         return fileContents.toString();
     }
 
-    public String readLines(int fromLine, int toLine)throws IndexOutOfBoundsException {
+    public String readLines()throws IndexOutOfBoundsException {
         List<String> listOfLines;
         listOfLines = Arrays.asList(this.read("src/main/resources/text_file.txt").split("\\r?\\n"));
         int numberOfLines = listOfLines.size();
         StringBuilder stringResult = new StringBuilder();
 
         if (fromLine == 1 && toLine == 1) {
-            stringResult.append(listOfLines.get(0)+"\n");
+            stringResult.append(listOfLines.get(0));
         } else if (fromLine > toLine) {
             System.out.println("First argument must be smaller or equal to second argument.");
             throw new IndexOutOfBoundsException();
         } else if (toLine > numberOfLines) {
             for (int i = fromLine-1; i < numberOfLines; i++) {
-                stringResult.append(listOfLines.get(i)+"\n");
+                stringResult.append(listOfLines.get(i));
             }
         } else {
             for (int i = fromLine-1; i < toLine; i++) {
-                stringResult.append(listOfLines.get(i)+"\n");
+                stringResult.append(listOfLines.get(i));
             }
         }
         return stringResult.toString();
